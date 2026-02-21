@@ -28,5 +28,10 @@ def generate_code(layout_text, framework):
         "stream": False
     }
 
-    response = requests.post(OLLAMA_URL, json=payload)
-    return response.json()["response"]
+    try:
+        response = requests.post(OLLAMA_URL, json=payload, timeout=620)
+        response.raise_for_status()
+        return response.json()["response"]
+    except requests.exceptions.RequestException as e:
+        print(f"Error connecting to Ollama (codegen): {e}")
+        raise RuntimeError("Ollama service is not running or unreachable. Please start Ollama locally.")

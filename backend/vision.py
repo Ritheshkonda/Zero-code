@@ -1,4 +1,3 @@
-from urllib import response
 import requests
 import base64
 
@@ -27,7 +26,12 @@ def extract_layout(image_bytes):
         "stream": False
     }
 
-    response = requests.post(OLLAMA_URL, json=payload)
-    print("OLLAMA RAW RESPONSE:", response.text)
-    return response.json().get("response", "No response key found")
+    try:
+        response = requests.post(OLLAMA_URL, json=payload, timeout=620)
+        response.raise_for_status()
+        print("OLLAMA RAW RESPONSE:", response.text)
+        return response.json().get("response", "No response key found")
+    except requests.exceptions.RequestException as e:
+        print(f"Error connecting to Ollama (vision): {e}")
+        raise RuntimeError("Ollama service is not running or unreachable. Please start Ollama locally.")
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import Sidebar from "./components/Sidebar";
 import CursorTrail from "./components/CursorTrail";
 import Upload from "./components/Upload";
@@ -15,10 +16,24 @@ function App() {
     setTheme(prev => prev === "dark" ? "light" : "dark");
   };
 
+  const handleHistorySelect = async (id) => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`http://127.0.0.1:8000/history/${id}`);
+      setLayout(res.data.layout);
+      setCode(res.data.code);
+    } catch (err) {
+      console.error("Failed to fetch history item:", err);
+      alert("Failed to open history item. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={`main-layout ${theme === "light" ? "light-mode" : ""}`}>
       <CursorTrail />
-      <Sidebar />
+      <Sidebar onSelectItem={handleHistorySelect} />
       
       <main className="main-content">
         <header className="top-nav">
