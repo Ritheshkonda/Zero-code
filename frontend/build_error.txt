@@ -1,0 +1,31 @@
+
+> frontend@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 10 modules transformed.
+Γ£ù Build failed in 176ms
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+C:/projects/zerocode/frontend/src/components/Upload.jsx:66:21: ERROR: Expected "}" but found "-"
+file: C:/projects/zerocode/frontend/src/components/Upload.jsx:66:21
+
+Expected "}" but found "-"
+64 |                display: 'flex', 
+65 |                alignItems: 'center', 
+66 |                justify-content: 'center',
+   |                       ^
+67 |                marginBottom: '20px',
+68 |                border: '1px solid var(--border)'
+
+    at failureErrorWithLog (C:\projects\zerocode\frontend\node_modules\esbuild\lib\main.js:1467:15)
+    at C:\projects\zerocode\frontend\node_modules\esbuild\lib\main.js:736:50
+    at responseCallbacks.<computed> (C:\projects\zerocode\frontend\node_modules\esbuild\lib\main.js:603:9)
+    at handleIncomingPacket (C:\projects\zerocode\frontend\node_modules\esbuild\lib\main.js:658:12)
+    at Socket.readFromStdout (C:\projects\zerocode\frontend\node_modules\esbuild\lib\main.js:581:7)
+    at Socket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+    at Readable.push (node:internal/streams/readable:392:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
